@@ -1,18 +1,12 @@
-var redus
+module.exports = function(req, res, next) {
 
-module.exports = function auth(){
-    if (req.session && req.session.user) {
-        User.get(req.session.user, function(err, user) {
-            if (user) {
-                req.user = user;
-            } else {
-                delete req.user;
-                delete req.session.user;
-            }
+    if (req.session && req.session.uid) {
 
-            next();
-        })
-    } else {
         next();
+
+    } else {
+
+        res.status(401).end();
+
     }
 }
